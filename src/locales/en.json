@@ -1,0 +1,23 @@
+{
+  "nav": { "aiDemo": "AI Demo", "matchTest": "Match Test", "swipeScore": "Swipe", "result": "Result", "matchResult": "Match Result" },
+  "ai": {
+    "demoTitle": "AI Demo (oss-20b scaffold check)",
+    "translateDemo": "Translate Demo",
+    "placeholderHello": "Hello!",
+    "placeholderSource": "Enter source",
+    "translating": "Translating…",
+    "translateJa": "AI Translate (ja)",
+    "quickReplyDemo": "Quick Reply Demo",
+    "loadingReplies": "Loading…",
+    "loadSuggestions": "Load suggestions",
+    "wait": "Please wait…",
+    "analyzing": "Analyzing input"
+  },
+  "error": { "unknown": "An unknown error occurred." },
+  "recentScore": "Recent score",
+  "ui": { "copy": "Copy", "share": "Share" },
+  "result": { "toResult": "Open Result", "likeCount": "Like count", "filter": "Filter" },
+  "label": { "gender": "Gender", "genderMale": "Male", "genderFemale": "Female", "genderOther": "Other" },
+  "sample": { "user": "User" },
+  "tag": { "kind": "Kind", "calm": "Calm", "active": "Active" }
+}

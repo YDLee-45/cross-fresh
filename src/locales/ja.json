@@ -1,0 +1,23 @@
+{
+  "nav": { "aiDemo": "AIデモ", "matchTest": "マッチテスト", "swipeScore": "スワイプ", "result": "結果", "matchResult": "マッチ結果" },
+  "ai": {
+    "demoTitle": "AI Demo（oss-20b スキャフォルド確認）",
+    "translateDemo": "翻訳デモ",
+    "placeholderHello": "こんにちは！",
+    "placeholderSource": "原文を入力",
+    "translating": "翻訳中…",
+    "translateJa": "AI翻訳(ja)",
+    "quickReplyDemo": "クイック返信デモ",
+    "loadingReplies": "読み込み中…",
+    "loadSuggestions": "おすすめ取得",
+    "wait": "少々お待ちください…",
+    "analyzing": "入力を解析中"
+  },
+  "error": { "unknown": "不明なエラーが発生しました。" },
+  "recentScore": "直近スコア",
+  "ui": { "copy": "コピー", "share": "共有" },
+  "result": { "toResult": "結果を見る", "likeCount": "いいね数", "filter": "フィルター" },
+  "label": { "gender": "性別", "genderMale": "男性", "genderFemale": "女性", "genderOther": "その他" },
+  "sample": { "user": "ユーザー" },
+  "tag": { "kind": "やさしい", "calm": "おだやか", "active": "アクティブ" }
+}
