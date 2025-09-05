@@ -1,0 +1,47 @@
+{
+  "name": "cross-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+
+    "adb:connect": "powershell -ExecutionPolicy Bypass -File scripts/adb-connect.ps1",
+    "dl": "powershell -ExecutionPolicy Bypass -File scripts/deeplink.ps1",
+    "usb": "powershell -ExecutionPolicy Bypass -File .\\connect-android.ps1",
+    "android:run": "npx expo run:android",
+
+    "clean-ports": "npx kill-port 8081 8083",
+    "dev": "npm run clean-ports && npx expo start --dev-client",
+    "dev:clean": "npm run clean-ports && npx expo start -c --dev-client",
+    "dev:usb": "npm run clean-ports && npm run usb && npx expo start -c --dev-client"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.1.2",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/native-stack": "^7.3.25",
+    "expo": "~53.0.22",
+    "expo-dev-client": "~5.2.4",
+    "expo-linking": "~7.1.7",
+    "expo-status-bar": "2.2.3",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@types/react": "~19.0.10",
+    "expo": "53.0.22",
+    "expo-build-properties": "^0.14.8",
+    "expo-dev-client": "5.2.4",
+    "expo-modules-autolinking": "2.1.14",
+    "kill-port": "^2.0.1",
+    "typescript": "~5.8.3"
+  }
+}

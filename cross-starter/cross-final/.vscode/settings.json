@@ -1,0 +1,14 @@
+{
+  // 스크롤백 라인 수(원하는 값으로)
+  "terminal.integrated.scrollback": 200000,
+
+  // PowerShell이 Clear-Host/cls 호출 시 버퍼까지 싹 지우지 않도록
+  "powershell.integratedConsole.forceClearScrollbackBuffer": false,
+
+  // VS Code 재시작/창 전환 시 터미널 세션 복원
+  "terminal.integrated.enablePersistentSessions": true,
+
+  // (선택) 터미널 폰트 크기도 고정하고 싶다면
+  // "terminal.integrated.fontSize": 14
+}
+

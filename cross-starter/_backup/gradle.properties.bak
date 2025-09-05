@@ -1,0 +1,13 @@
+# Project-wide Gradle settings
+org.gradle.jvmargs=-Xmx3g -Dfile.encoding=UTF-8
+
+# AndroidX
+android.useAndroidX=true
+
+# React Native / Expo
+newArchEnabled=false
+expo.jsEngine=hermes
+expo.useLegacyPackaging=false
+
+# ⚠ Kotlin 버전 핀 금지 (expo-root-project가 관리)
+# expo.kotlin.version=  <-- 넣지 마세요

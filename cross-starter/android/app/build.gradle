@@ -1,0 +1,85 @@
+plugins {
+  id "com.android.application"
+  id "org.jetbrains.kotlin.android"   // 버전은 RN/Expo가 관리
+  id "com.facebook.react"
+}
+
+// :app 프로젝트에서 플러그인/모듈이 참조할 수 있게 확실히 노출
+ext {
+  // expo.jsEngine 값을 우선 사용, 없으면 Hermes 기본
+  hermesEnabled = ((findProperty("expo.jsEngine") ?: "hermes").toString() == "hermes")
+  // 필요 시 ndkVersion override 가능 (루트 ext 있으면 자동 사용)
+  if (rootProject.ext.has("ndkVersion")) {
+    ndkVersion = rootProject.ext.ndkVersion
+  }
+}
+
+android {
+  namespace 'com.yourcompany.crossfinal'
+
+  // 최신 AAR 메타데이터 요구 만족 (appcompat 1.7.0 등)
+  compileSdk 35
+  buildToolsVersion "35.0.0"
+
+  defaultConfig {
+    applicationId 'com.yourcompany.crossfinal'
+    minSdk 24
+    targetSdk 35
+    versionCode 1
+    versionName "1.0.0"
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file("debug.keystore")
+      storePassword "android"
+      keyAlias "androiddebugkey"
+      keyPassword "android"
+    }
+  }
+
+  buildTypes {
+    debug   { signingConfig signingConfigs.debug }
+    release {
+      signingConfig signingConfigs.debug         // 배포 시 교체 필요
+      minifyEnabled (findProperty("android.enableProguardInReleaseBuilds")?.toBoolean() ?: false)
+      shrinkResources (findProperty("android.enableShrinkResourcesInReleaseBuilds")?.toBoolean() ?: false)
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    }
+  }
+
+  // JDK 17 (AGP 8 권장)
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions { jvmTarget = "17" }
+
+  // NDK (필요 시)
+  if (project.ext.has("ndkVersion") && project.ext.ndkVersion) {
+    ndkVersion project.ext.ndkVersion
+  }
+
+  packagingOptions {
+    jniLibs {
+      useLegacyPackaging (findProperty("expo.useLegacyPackaging")?.toBoolean() ?: false)
+    }
+  }
+
+  androidResources {
+    ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
+  }
+}
+
+def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
+
+// RN 본체 + JS 엔진 선택 (ext.hermesEnabled 값 사용)
+dependencies {
+  implementation("com.facebook.react:react-android")
+
+  if (project.ext.hermesEnabled) {
+    implementation("com.facebook.react:hermes-android")
+  } else {
+    implementation jscFlavor
+  }
+}

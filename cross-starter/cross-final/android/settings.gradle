@@ -1,0 +1,32 @@
+// android/settings.gradle  (RN 0.74.x + Expo 사용 기준)
+
+
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+  }
+}
+
+// 버전을 하드코딩하지 않고, includeBuild 에서 가져오게 둡니다.
+plugins {
+  id("com.facebook.react.settings")
+}
+
+rootProject.name = "cross-final"   // 프로젝트 이름에 맞게 필요하면 수정
+include(":app")
+
+// ── RN Gradle Plugin 을 node_modules 에서 직접 가져오기(플러그인 not found 방지)
+def rnGradlePluginPkg = ["node","--print","require.resolve('react-native-gradle-plugin/package.json')"]
+        .execute(null, rootDir).text.trim()
+includeBuild(new File(rnGradlePluginPkg).getParentFile())
+
+// ── Expo autolinking 스크립트 적용 (정확한 경로는 scripts/**android**/autolinking.gradle 임)
+def expoAutolinkingGradle = ["node","--print","require.resolve('expo-modules-autolinking/scripts/android/autolinking.gradle')"]
+        .execute(null, rootDir).text.trim()
+apply from: new File(expoAutolinkingGradle)
+
+// (참고) Expo를 사용하지 않는다면 위 2줄을 주석 처리하고 아래를 쓰면 됩니다.
+// apply from: new File(["node","--print","require.resolve('react-native-gradle-plugin/scripts/autolinking.gradle')"]
+//        .execute(null, rootDir).text.trim())

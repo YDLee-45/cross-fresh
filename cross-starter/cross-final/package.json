@@ -1,0 +1,31 @@
+{
+  "name": "cross-final",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo/AppEntry",
+  "scripts": {
+    "start": "expo start -c",
+    "prebuild:android": "expo prebuild -p android --no-install",
+    "one:debug": "powershell -NoProfile -ExecutionPolicy Bypass -File ./tools/one-shot.ps1",
+    "one:release": "powershell -NoProfile -ExecutionPolicy Bypass -File ./tools/one-shot.ps1 -Build release",
+    "one:sdk": "powershell -NoProfile -ExecutionPolicy Bypass -File ./tools/one-shot.ps1 -SdkAutoInstall",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "expo": "~51.0.0",
+    "expo-modules-autolinking": "~1.11.0",
+    "expo-modules-core": "^2.5.0",
+    "expo-splash-screen": "~0.27.5",
+    "expo-status-bar": "~1.12.1",
+    "expo-system-ui": "~3.0.5",
+    "react": "18.2.0",
+    "react-native": "0.74.5"
+  },
+  "devDependencies": {
+    "@types/react": "~18.2.45",
+    "@types/react-native": "~0.73.0",
+    "babel-preset-expo": "~11.0.0",
+    "typescript": "~5.3.3"
+  }
+}

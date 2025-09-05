@@ -1,0 +1,47 @@
+// Project-level build file
+
+buildscript {
+  repositories {
+    google()
+    mavenCentral()
+  }
+  dependencies {
+    // 버전 관리는 RN/Expo 플러그인이 처리
+    classpath("com.android.tools.build:gradle")
+    classpath("com.facebook.react:react-native-gradle-plugin")
+  }
+}
+
+// Expo 루트 플러그인 (버전 정렬/카탈로그/오토설정)
+apply plugin: "expo-root-project"
+
+// 전역 ext — 일부 모듈에서 참고
+ext {
+  ndkVersion = "26.1.10909125"
+}
+
+// 기본 저장소
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+  }
+}
+
+/**
+ * AGP 8.x 호환 패치:
+ * 일부 라이브러리가 `components.release` 접근 시 실패하는 케이스 방지
+ * (expo-modules-core 등). 모든 Android 라이브러리에 release variant 보장.
+ */
+subprojects { P ->
+  P.plugins.withId("com.android.library") {
+    P.afterEvaluate {
+      def androidExt = P.extensions.findByName("android")
+      if (androidExt != null) {
+        try {
+          androidExt.publishing { singleVariant("release") }
+        } catch (Throwable ignore) { /* 안전 무시 */ }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+// --- Android settings.gradle (RN 0.74.x + Expo 모듈 호환) --------------------
+
+pluginManagement {
+  // ⬇︎ RN/Expo 관련 플러그인들을 "어디서" 찾을지 정확히 지정
+  repositories {
+    // RN이 동봉한 로컬 Maven (react-android, gradle-plugin 등)
+    maven { url = uri("$rootDir/../node_modules/react-native/android") }
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+
+  // RN Gradle 플러그인을 node_modules에서 직접 include (원격 검색 회피)
+  includeBuild("../node_modules/@react-native/gradle-plugin")
+
+  // Expo Gradle 플러그인 include (expo-autolinking, expo-root-project용)
+  def expoPluginsPath = new File(
+    providers.exec {
+      workingDir(rootDir)
+      commandLine(
+        "node",
+        "--print",
+        "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })"
+      )
+    }.standardOutput.asText.get().trim(),
+    "../android/expo-gradle-plugin"
+  ).absolutePath
+  includeBuild(expoPluginsPath)
+}
+
+// RN/Expo의 settings 플러그인 적용
+plugins {
+  id("com.facebook.react.settings")
+  id("expo-autolinking-settings")
+}
+
+// RN autolinking: Expo 커맨드를 통해 RN 링크 정보 생성
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+  if (System.getenv("EXPO_USE_COMMUNITY_AUTOLINKING") == "1") {
+    ex.autolinkLibrariesFromCommand()
+  } else {
+    ex.autolinkLibrariesFromCommand(expoAutolinking.rnConfigCommand)
+  }
+}
+expoAutolinking.useExpoModules()
+expoAutolinking.useExpoVersionCatalog()
+
+// 프로젝트명 및 모듈 구성
+rootProject.name = 'Cross Final'
+include(":app")
+
+// 모든 프로젝트의 의존성 리포지터리(모듈 단계에서 재정의 금지)
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositories {
+    // RN 로컬 Maven을 항상 먼저
+    maven { url = uri("$rootDir/../node_modules/react-native/android") }
+    google()
+    mavenCentral()
+  }
+}

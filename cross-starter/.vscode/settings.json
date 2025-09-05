@@ -1,0 +1,10 @@
+{
+  "css.lint.unknownVendorSpecificProperties": "ignore",
+  "scss.lint.unknownVendorSpecificProperties": "ignore",
+  "less.lint.unknownVendorSpecificProperties": "ignore",
+  "files.exclude": {
+    "**/node_modules/**": true
+  },
+  "terminal.integrated.scrollback": 200000,
+  "powershell.integratedConsole.forceClearScrollbackBuffer": true
+}

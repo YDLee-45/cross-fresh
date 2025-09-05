@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "CROSS",
+    "slug": "cross-starter",
+    "scheme": "cross",
+    "sdkVersion": "53.0.0",
+    "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ],
+          "data": [
+            {
+              "scheme": "cross"
+            }
+          ]
+        },
+        {
+          "action": "VIEW",
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ],
+          "data": [
+            {
+              "scheme": "cross"
+            }
+          ]
+        }
+      ],
+      "package": "com.ydlee.crossstarter"
+    }
+  }
+}

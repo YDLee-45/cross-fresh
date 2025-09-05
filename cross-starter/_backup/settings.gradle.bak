@@ -1,0 +1,50 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+  }
+
+  // React Native Gradle Plugin (included build)
+  def rnPluginPath = new File(
+    providers.exec {
+      workingDir(rootDir)
+      commandLine(
+        "node",
+        "--print",
+        "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"
+      )
+    }.standardOutput.asText.get().trim()
+  ).getParentFile().absolutePath
+  includeBuild(rnPluginPath)
+
+  // Expo Gradle Plugin (included build)
+  def expoPluginPath = new File(
+    providers.exec {
+      workingDir(rootDir)
+      commandLine(
+        "node",
+        "--print",
+        "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })"
+      )
+    }.standardOutput.asText.get().trim(),
+    "../android/expo-gradle-plugin"
+  ).absolutePath
+  includeBuild(expoPluginPath)
+}
+
+plugins {
+  id("com.facebook.react.settings")
+  id("expo-autolinking-settings")
+}
+
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+  // Expo CLI의 rnConfigCommand를 통해 RN/Expo 모듈 자동링크
+  ex.autolinkLibrariesFromCommand(expoAutolinking.rnConfigCommand)
+}
+
+expoAutolinking.useExpoVersionCatalog()
+
+rootProject.name = "CROSS"
+include(":app")
+includeBuild(expoAutolinking.reactNativeGradlePlugin)
