@@ -8,21 +8,25 @@
     "platforms": ["android"],
     "android": {
       "package": "com.yourcompany.crossfinal",
-      "versionCode": 1
-    },
-    "plugins": [
-      [
-        "expo-build-properties",
+      "versionCode": 1,
+      "intentFilters": [
         {
-          "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
-            "ndkVersion": "27.1.12297006",
-            "kotlinVersion": "2.0.21"
-          }
+          "action": ["VIEW"],
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": [{ "scheme": "crossfinal" }]
         }
       ]
+    },
+    "plugins": [
+      ["expo-build-properties", {
+        "android": {
+          "compileSdkVersion": 35,
+          "targetSdkVersion": 35,
+          "buildToolsVersion": "35.0.0",
+          "ndkVersion": "27.1.12297006",
+          "kotlinVersion": "2.0.21"
+        }
+      }]
     ]
   }
 }
