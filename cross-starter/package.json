@@ -7,12 +7,10 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-
     "adb:connect": "powershell -ExecutionPolicy Bypass -File scripts/adb-connect.ps1",
     "dl": "powershell -ExecutionPolicy Bypass -File scripts/deeplink.ps1",
     "usb": "powershell -ExecutionPolicy Bypass -File .\\connect-android.ps1",
     "android:run": "npx expo run:android",
-
     "clean-ports": "npx kill-port 8081 8083",
     "dev": "npm run clean-ports && npx expo start --dev-client",
     "dev:clean": "npm run clean-ports && npx expo start -c --dev-client",
@@ -38,7 +36,7 @@
     "@babel/core": "^7.25.0",
     "@types/react": "~19.0.10",
     "expo": "53.0.22",
-    "expo-build-properties": "^0.14.8",
+    "expo-build-properties": "0.14.8",
     "expo-dev-client": "5.2.4",
     "expo-modules-autolinking": "2.1.14",
     "kill-port": "^2.0.1",
