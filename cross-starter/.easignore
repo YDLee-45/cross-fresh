@@ -1,0 +1,10 @@
+.git
+.expo
+.expo-shared
+node_modules
+android/.gradle
+android/app/build
+**/*.log
+_backup/
+_build.log
+_build_full.log
