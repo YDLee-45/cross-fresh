@@ -1,9 +1,8 @@
-﻿param([Parameter(Mandatory=$true)][string]$Path)
+﻿# scripts/deeplink.ps1
+Param([string]$Url = "cross://open")
+$ErrorActionPreference = 'Stop'
 
-$lines = adb devices | Select-String "device$" | Where-Object { $_ -notmatch "^List of" }
-if (-not $lines) { Write-Error "디바이스 없음. 먼저 USB 연결 또는 adb-connect/adb-pair!" ; exit 1 }
+$device = (adb devices | Select-String "device$" | ForEach-Object { ($_ -split "`t")[0] } | Select-Object -First 1)
+if (-not $device) { throw "No Android device found. adb devices 확인 필요." }
 
-$first  = ($lines | Select-Object -First 1).ToString()
-$serial = ($first -split "\s+")[0].Trim()
-
-adb -s $serial shell am start -a android.intent.action.VIEW -d "cross://$Path"
+adb -s $device shell am start -a android.intent.action.VIEW -d "$Url" com.android.chrome
