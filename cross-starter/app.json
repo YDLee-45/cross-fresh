@@ -1,27 +1,30 @@
 ﻿{
-  "expo": {
-    "owner": "ydlee",
-    "plugins": [
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "minSdkVersion": 24,
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "kotlinVersion": "1.9.24",
-            "androidGradlePluginVersion": "8.4.2"
-          }
-        }
-      ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "6e6ad2de-d878-474f-a8cd-9f8f6f9031d9"
+  "cli": { "version": ">= 9.0.0" },
+  "build": {
+    "preview": {
+      "android": { "buildType": "apk" },
+      "node": "20.12.2",
+      "env": {
+        "NPM_CONFIG_LEGACY_PEER_DEPS": "1",
+        "NPM_CONFIG_ENGINE_STRICT": "0"
       }
     },
-    "android": {
-      "package": "com.ydlee.crossstarter"
+    "development": {
+      "developmentClient": true,
+      "android": { "buildType": "apk" },
+      "node": "20.12.2",
+      "env": {
+        "NPM_CONFIG_LEGACY_PEER_DEPS": "1",
+        "NPM_CONFIG_ENGINE_STRICT": "0"
+      }
+    },
+    "production": {
+      "android": { "buildType": "app-bundle" },
+      "node": "20.12.2",
+      "env": {
+        "NPM_CONFIG_LEGACY_PEER_DEPS": "1",
+        "NPM_CONFIG_ENGINE_STRICT": "0"
+      }
     }
   }
 }
