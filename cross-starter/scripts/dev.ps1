@@ -1,34 +1,39 @@
 Param(
-  [switch],
-  [switch],
-  [switch],
-  [switch]
+  [switch]$ClearCache,
+  [switch]$NoDevTools,
+  [switch]$Lan,
+  [switch]$Tunnel
 )
-\Continue = 'Stop'
 
-if (-not \) {
-  Write-Host "
-[1/2] React DevTools ½ÇÇà..." -ForegroundColor Cyan
-  Start-Process "cmd.exe" "/c nWrite-Host "[2/2] Expo(DEV) ½ÃÀÛ..." -ForegroundColor Cyan
+$ErrorActionPreference = 'Stop'
 
-# ADB »óÅÂ °¨Áö
-\ = & adb devices 2>\
-\  = (\ | Select-String "device$").Count -gt 0
-\ = (\ | Select-String "offline$").Count -gt 0
-
-# Expo ÀÎÀÚ
-\ = "start"
-if (\) { \ += " -c" }
-
-if (\) {
-  \ = "1"; \ += " --tunnel"
-} elseif (\) {
-  \ = "1"; \ += " --lan"
+if (-not $NoDevTools) {
+  Write-Host "`n[1/2] React DevTools ì‹¤í–‰..." -ForegroundColor Cyan
+  Start-Process "cmd.exe" "/c npx react-devtools"
 } else {
-  if (-not \ -or \) {
-    \ = "1"; \ += " --tunnel"
-    Write-Host "ADB ¹Ì¿¬°á/¿ÀÇÁ¶óÀÎ °¨Áö  ÅÍ³Î ¸ğµå·Î ÀüÈ¯" -ForegroundColor Yellow
+  Write-Host "`n[1/2] React DevTools ìƒëµ" -ForegroundColor DarkGray
+}
+
+Write-Host "[2/2] Expo(DEV) ì‹œì‘..." -ForegroundColor Cyan
+
+# ADB ìƒíƒœ ê°ì§€
+$adbOut    = & adb devices 2>$null
+$hasDevice = ($adbOut | Select-String "device$").Count -gt 0
+$hasOffline = ($adbOut | Select-String "offline$").Count -gt 0
+
+# Expo ì¸ì
+$expoArgs = "start"
+if ($ClearCache) { $expoArgs += " -c" }
+
+if ($Tunnel) {
+  $env:EXPO_NO_ADB_REVERSE = "1"; $expoArgs += " --tunnel"
+} elseif ($Lan) {
+  $env:EXPO_NO_ADB_REVERSE = "1"; $expoArgs += " --lan"
+} else {
+  if (-not $hasDevice -or $hasOffline) {
+    $env:EXPO_NO_ADB_REVERSE = "1"; $expoArgs += " --tunnel"
+    Write-Host "ADB ë¯¸ì—°ê²°/ì˜¤í”„ë¼ì¸ ê°ì§€ â†’ í„°ë„ ëª¨ë“œë¡œ ì „í™˜" -ForegroundColor Yellow
   }
 }
 
-npx expo \
+npx expo $expoArgs

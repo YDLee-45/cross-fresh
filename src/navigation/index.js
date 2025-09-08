@@ -1,40 +1,24 @@
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as Linking from 'expo-linking';
-import MatchStepScreen from '../screens/MatchStepScreen';
-import MatchResultScreen from '../screens/MatchResultScreen';
-import { useMatchStore } from '../store/matchStore';
-import { parseFilterLink, parseLikedLink } from '../utils/linkKit';
+﻿// src/navigation/index.js
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from '../screens/HomeScreen';
+import SwipeScreen from '../screens/SwipeScreen';
+import FilterScreen from '../screens/FilterScreen';
+import LikedScreen from '../screens/LikedScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import LoginScreen from '../screens/LoginScreen';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
-export default function RootNavigator() {
-  
-  const setFilters = useMatchStore(s => s.setFilters);
-  const hydrateLikedFromArray = useMatchStore(s => s.hydrateLikedFromArray);
-
-  useEffect(() => {
-    const handleUrl = ({ url }) => {
-      const f = parseFilterLink(url);
-      if (f) setFilters(f);
-      const liked = parseLikedLink(url);
-      if (liked && liked.length) hydrateLikedFromArray(liked);
-    };
-    const sub = Linking.addEventListener('url', handleUrl);
-    (async () => {
-      const initial = await Linking.getInitialURL();
-      if (initial) handleUrl({ url: initial });
-    })();
-    return () => sub.remove();
-  }, [setFilters, hydrateLikedFromArray]);
-
+export default function StackNav() {
   return (
-    <NavigationContainer linking={{ prefixes: ['cross://'] }}>
-      <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
-        <Stack.Screen name="MatchStep" component={MatchStepScreen} options={{ title: '매칭 조건' }} />
-        <Stack.Screen name="MatchResult" component={MatchResultScreen} options={{ title: '매칭 결과' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator /* initialRouteName="Home" 등 필요시 */>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Swipe" component={SwipeScreen} />
+      <Stack.Screen name="Filter" component={FilterScreen} />
+      <Stack.Screen name="Liked" component={LikedScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+    </Stack.Navigator>
   );
 }

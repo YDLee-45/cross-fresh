@@ -1,0 +1,6 @@
+﻿{
+  "build": {
+    "development": { "developmentClient": true, "distribution": "internal", "node": "20.11.1" },
+    "production":  { "node": "20.11.1" }
+  }
+}

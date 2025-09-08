@@ -1,52 +1,27 @@
-{
+﻿{
   "expo": {
-    "name": "Cross Final",
-    "slug": "cross-final",
-    "scheme": "crossfinal",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "platforms": [
-      "android"
-    ],
-    "android": {
-      "package": "com.yourcompany.crossfinal",
-      "versionCode": 1,
-      "intentFilters": [
-        {
-          "action": [
-            "VIEW"
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "data": [
-            {
-              "scheme": "crossfinal"
-            }
-          ]
-        }
-      ]
-    },
+    "owner": "ydlee",
     "plugins": [
       [
         "expo-build-properties",
         {
           "android": {
+            "minSdkVersion": 24,
             "compileSdkVersion": 35,
             "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
-            "ndkVersion": "27.1.12297006",
-            "kotlinVersion": "2.0.21"
+            "kotlinVersion": "1.9.24",
+            "androidGradlePluginVersion": "8.4.2"
           }
         }
       ]
     ],
     "extra": {
       "eas": {
-        "projectId": "0bec79ab-dbc1-4a17-a5f2-065c782354fb"
+        "projectId": "6e6ad2de-d878-474f-a8cd-9f8f6f9031d9"
       }
     },
-    "owner": "ydlee"
+    "android": {
+      "package": "com.ydlee.crossstarter"
+    }
   }
 }

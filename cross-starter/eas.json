@@ -1,17 +1,10 @@
 {
-  "cli": { "version": ">= 9.0.0", "appVersionSource": "remote" },
+  "cli": { "version": ">= 9.0.0" },
   "build": {
-    "preview": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
       "android": { "buildType": "apk" },
-      "node": "20.12.2",
-      "env": {
-        "NPM_CONFIG_LEGACY_PEER_DEPS": "1",
-        "NPM_CONFIG_ENGINE_STRICT": "0"
-      }
-    },
-    "production": {
-      "android": { "buildType": "app-bundle" },
-      "node": "20.12.2",
       "env": {
         "NPM_CONFIG_LEGACY_PEER_DEPS": "1",
         "NPM_CONFIG_ENGINE_STRICT": "0"

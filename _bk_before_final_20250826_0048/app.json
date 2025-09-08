@@ -1,0 +1,44 @@
+﻿{
+    "expo":  {
+                 "name":  "CROSS",
+                 "slug":  "cross",
+                 "scheme":  "cross",
+                 "jsEngine":  "hermes",
+                 "orientation":  "portrait",
+                 "updates":  {
+                                 "enabled":  true,
+                                 "fallbackToCacheTimeout":  0
+                             },
+                 "runtimeVersion":  {
+                                        "policy":  "sdkVersion"
+                                    },
+                 "ios":  {
+                             "bundleIdentifier":  "com.ydlee.cross",
+                             "supportsTablet":  true
+                         },
+                 "android":  {
+                                 "package":  "com.ydlee.cross",
+                                 "intentFilters":  [
+                                                       {
+                                                           "action":  "VIEW",
+                                                           "autoVerify":  false,
+                                                           "category":  [
+                                                                            "BROWSABLE",
+                                                                            "DEFAULT"
+                                                                        ],
+                                                           "data":  [
+                                                                        {
+                                                                            "scheme":  "cross"
+                                                                        }
+                                                                    ]
+                                                       }
+                                                   ]
+                             },
+                 "extra":  {
+                               "eas":  {
+                                           "projectId":  "3ab9f932-c14e-4346-a585-821be7a2ead5"
+                                       }
+                           },
+                 "owner":  "ydlee"
+             }
+}

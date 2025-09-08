@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "CROSS",
+    "slug": "cross",
+    "scheme": "cross",
+    "jsEngine": "hermes",
+    "orientation": "portrait",
+    "updates": { "enabled": true, "fallbackToCacheTimeout": 0 },
+    "runtimeVersion": { "policy": "sdkVersion" },
+    "ios": { "bundleIdentifier": "com.ydlee.cross", "supportsTablet": true },
+    "android": {
+      "package": "com.ydlee.cross",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": false,
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": [{ "scheme": "cross" }]
+        }
+      ]
+    },
+    "extra": {
+      "eas": { "projectId": "REPLACE_ME" }
+    }
+  }
+}
